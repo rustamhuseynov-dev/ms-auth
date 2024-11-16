@@ -44,8 +44,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (token != null){
             if (!jwtService.isValidUserIdFromToken(token)) {
                refreshToken = String.valueOf(authService.refreshToken(new RefreshRequest(token)));
+            }else {
+                refreshToken = token;
             }
-            
         }
 
         if (refreshToken != null && jwtService.validateToken(refreshToken)) {
